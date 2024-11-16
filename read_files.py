@@ -71,7 +71,7 @@ def read_wrf(file_name,db_connection,data_connection,today_str,yesterday_str,tom
         df = data.to_dataframe().reset_index()
         df['Times']=df['Times'].apply(parse_timestamp)
         df['Times'] = df['Times'] + timedelta(hours=5,minutes=30)
-        df['temp'] = df['T2'] - 273.15
+        df['T2'] = df['T2'] - 273.15
         df.rename(columns={'Times':'timestamp','XLAT':'lat',"XLONG":"lon","T2":'temp'},inplace=True)
         df['st'] = 'n'
         df = df.loc[:,cols_select]
@@ -98,7 +98,7 @@ def read_wrf(file_name,db_connection,data_connection,today_str,yesterday_str,tom
                   method='multi',
                   chunksize=100000)
                 if resp:
-                    with db_connection as conn_db:
+                    with db_connection.connect() as conn_db:
                         conn_db.execute(f"UPDATE {file_logs_schema}.transfer_wrf_logs SET read_status = 1 WHERE file='{file_name}' and read_status=0")
                         conn_db.commit()
                     with data_connection.connect() as conn_data:
