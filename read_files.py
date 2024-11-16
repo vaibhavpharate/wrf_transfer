@@ -75,7 +75,7 @@ def read_wrf(file_name,db_connection,data_connection,today_str,yesterday_str,tom
         df.rename(columns={'Times':'timestamp','XLAT':'lat',"XLONG":"lon","T2":'temp'},inplace=True)
         df['st'] = 'n'
         df = df.loc[:,cols_select]
-        
+        #thsi si asd
         if len(df) > 1000:
             with data_connection.connect() as conn:
                 try:
