@@ -26,9 +26,9 @@ def get_start_and_end_of_day(input_date=None):
     Returns:
         tuple: (start_of_day, end_of_day) as datetime objects
     """
-    # Use the provided date or default to today
+    # Use the provided date or default to today NEED TO CHANGE THIS
     if input_date is None:
-        input_date = datetime.now()
+        input_date = datetime.now()  # + timedelta(hours=5,minutes=30)
     
     # Start of the day
     start_of_day = datetime(input_date.year, input_date.month, input_date.day)

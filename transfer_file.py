@@ -71,7 +71,7 @@ def transfer_wrf_file(ssh_client,latest_date,wrf_file_name,db_connection):
     if os.path.exists(file_path) == False:
         sftp_client.get(source_file_path,file_path)
         df_log = pd.DataFrame({    'status':['transferred'],
-                                   'log_ts':[datetime.now()],'file':[wrf_file_name],
+                                   'log_ts':[datetime.now()],'file':[wrf_file_name], ## NEED TO UPDATE HERE
                                    'read_status':[0],
                                    'source_timestamp':[latest_date]})
         df_log.to_sql(schema=file_logs_schema,
